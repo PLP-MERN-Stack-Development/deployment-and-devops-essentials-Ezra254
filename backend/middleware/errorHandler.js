@@ -1,6 +1,7 @@
 const logger = require('../config/logger');
 
-const errorHandler = (err, req, res, next) => {
+// mark unused `next` as `_next` to satisfy eslint `no-unused-vars` rule
+const errorHandler = (err, req, res, _next) => {
   let error = { ...err };
   error.message = err.message;
 

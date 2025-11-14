@@ -56,7 +56,7 @@ router.get('/tasks/:id', async (req, res, next) => {
 router.post('/tasks', async (req, res, next) => {
   try {
     const { title, description, completed } = req.body;
-    
+
     if (!title) {
       return res.status(400).json({
         success: false,
