@@ -27,13 +27,29 @@ const corsOptions = {
     // Allow requests with no origin (like mobile apps or curl requests)
     if (!origin) return callback(null, true);
     
-    if (allowedOrigins.indexOf(origin) !== -1 || !process.env.FRONTEND_URL) {
-      callback(null, true);
-    } else {
-      console.warn(`⚠️ CORS blocked request from origin: ${origin}`);
-      console.log(`Allowed origins: ${allowedOrigins.join(', ')}`);
-      callback(new Error('Not allowed by CORS'));
+    // Check if origin matches any allowed origin exactly
+    if (allowedOrigins.indexOf(origin) !== -1) {
+      return callback(null, true);
     }
+    
+    // For Vercel deployments, allow any vercel.app subdomain
+    // This handles cases where Vercel generates different URLs
+    if (origin && origin.includes('.vercel.app')) {
+      console.log(`✅ Allowing Vercel origin: ${origin}`);
+      return callback(null, true);
+    }
+    
+    // If no FRONTEND_URL is set, allow all origins (development mode)
+    if (!process.env.FRONTEND_URL) {
+      console.log(`⚠️ No FRONTEND_URL set, allowing origin: ${origin}`);
+      return callback(null, true);
+    }
+    
+    // Origin not allowed
+    console.warn(`⚠️ CORS blocked request from origin: ${origin}`);
+    console.log(`Allowed origins: ${allowedOrigins.join(', ')}`);
+    console.log(`Note: Vercel URLs are automatically allowed`);
+    callback(new Error('Not allowed by CORS'));
   },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
