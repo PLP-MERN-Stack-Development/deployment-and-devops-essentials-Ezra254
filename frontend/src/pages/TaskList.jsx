@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 import { taskService } from '../services/api'
 import toast from 'react-hot-toast'
@@ -14,11 +14,7 @@ const TaskList = () => {
     sort: '-createdAt'
   })
 
-  useEffect(() => {
-    loadTasks()
-  }, [filters])
-
-  const loadTasks = async () => {
+  const loadTasks = useCallback(async () => {
     try {
       setLoading(true)
       const response = await taskService.getAll(filters)
@@ -28,7 +24,11 @@ const TaskList = () => {
     } finally {
       setLoading(false)
     }
-  }
+  }, [filters])
+
+  useEffect(() => {
+    loadTasks()
+  }, [loadTasks])
 
   const handleDelete = async (id) => {
     if (!window.confirm('Are you sure you want to delete this task?')) {

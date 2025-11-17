@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { taskService } from '../services/api'
 import toast from 'react-hot-toast'
@@ -19,13 +19,7 @@ const TaskForm = () => {
     dueDate: ''
   })
 
-  useEffect(() => {
-    if (isEdit) {
-      loadTask()
-    }
-  }, [id])
-
-  const loadTask = async () => {
+  const loadTask = useCallback(async () => {
     try {
       setLoading(true)
       const response = await taskService.getById(id)
@@ -43,7 +37,14 @@ const TaskForm = () => {
     } finally {
       setLoading(false)
     }
-  }
+  }, [id, navigate])
+
+  useEffect(() => {
+    if (isEdit) {
+      loadTask()
+    }
+  }, [isEdit, loadTask])
+
 
   const handleChange = (e) => {
     const { name, value } = e.target
