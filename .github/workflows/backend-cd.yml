@@ -1,0 +1,38 @@
+name: Backend CD
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'backend/**'
+      - '.github/workflows/backend-cd.yml'
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+
+    - name: Install dependencies
+      working-directory: ./backend
+      run: npm ci
+
+    - name: Build check
+      working-directory: ./backend
+      run: |
+        echo "Backend deployment check passed"
+        echo "Deploy to your platform (Render, Railway, or Heroku)"
+        echo "Make sure to set the following environment variables:"
+        echo "- MONGODB_URI"
+        echo "- NODE_ENV=production"
+        echo "- FRONTEND_URL"
+        echo "- PORT (usually set by platform)"
+

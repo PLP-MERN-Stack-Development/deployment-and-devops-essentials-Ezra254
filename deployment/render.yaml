@@ -1,0 +1,17 @@
+# Render Blueprint for Backend Deployment
+services:
+  - type: web
+    name: mern-task-manager-api
+    env: node
+    buildCommand: cd backend && npm install
+    startCommand: cd backend && npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        sync: false
+      - key: FRONTEND_URL
+        sync: false
+      - key: PORT
+        value: 10000
+

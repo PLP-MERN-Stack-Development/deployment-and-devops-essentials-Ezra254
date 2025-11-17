@@ -1,0 +1,19 @@
+# Render Blueprint for Backend Deployment
+# Note: When using this blueprint, set root directory to "backend" in Render dashboard
+services:
+  - type: web
+    name: mern-task-manager-api
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        sync: false
+      - key: FRONTEND_URL
+        sync: false
+      - key: PORT
+        value: 10000
+
