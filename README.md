@@ -213,7 +213,20 @@ Use the provided health check script:
 node monitoring/health-check.js
 ```
 
-Set `API_URL` environment variable to your deployed backend URL.
+Set `API_URL` environment variable to your deployed backend URL:
+```bash
+API_URL=https://deployment-and-devops-essentials-ezra254.onrender.com node monitoring/health-check.js
+```
+
+### Live Health Check
+Monitor your backend health in real-time:
+- **Health Endpoint**: https://deployment-and-devops-essentials-ezra254.onrender.com/api/health
+- **Expected Response**: `{"status":"OK","timestamp":"...","uptime":...,"environment":"production"}`
+
+### Monitoring Setup
+- **Backend Logs**: Available in Render dashboard → Logs tab
+- **Frontend Logs**: Available in Vercel dashboard → Deployments → Function Logs
+- **Health Monitoring**: Use uptime monitoring services like UptimeRobot to monitor the health endpoint
 
 ## 🔒 Security Features
 
@@ -255,15 +268,31 @@ Set `API_URL` environment variable to your deployed backend URL.
 
 ## 📸 Screenshots
 
-_Add screenshots of your deployed application and CI/CD pipeline here_
+### Deployed Application
+- Frontend: https://deploymentanddevopsessentials-joszi6a0s-ezra254s-projects.vercel.app
+- Backend API: https://deployment-and-devops-essentials-ezra254.onrender.com
+
+### CI/CD Pipeline
+GitHub Actions workflows are configured and running:
+- Frontend CI: Lints and builds on every push/PR
+- Backend CI: Validates code quality on every push/PR
+- Automatic deployments triggered on push to main branch
+
+_Add screenshots of your CI/CD pipeline runs from GitHub Actions here_
 
 ## 🔗 Deployment URLs
 
-_After deployment, add your URLs here:_
+✅ **Application is Live!**
 
-- **Frontend URL**: _Your frontend deployment URL_
-- **Backend API URL**: _Your backend deployment URL_
-- **Health Check**: _Your backend URL + /api/health_
+- **Frontend URL**: [https://deploymentanddevopsessentials-joszi6a0s-ezra254s-projects.vercel.app](https://deploymentanddevopsessentials-joszi6a0s-ezra254s-projects.vercel.app)
+- **Backend API URL**: [https://deployment-and-devops-essentials-ezra254.onrender.com](https://deployment-and-devops-essentials-ezra254.onrender.com)
+- **Health Check**: [https://deployment-and-devops-essentials-ezra254.onrender.com/api/health](https://deployment-and-devops-essentials-ezra254.onrender.com/api/health)
+- **API Root**: [https://deployment-and-devops-essentials-ezra254.onrender.com](https://deployment-and-devops-essentials-ezra254.onrender.com)
+
+### Deployment Platforms
+- **Frontend**: Vercel (React/Vite)
+- **Backend**: Render (Node.js/Express)
+- **Database**: MongoDB Atlas
 
 ## 📚 Resources
 
@@ -288,6 +317,11 @@ _After deployment, add your URLs here:_
 - [x] Responsive and user-friendly UI
 - [x] Deployment configurations
 - [x] Comprehensive documentation
+- [x] **Frontend deployed to Vercel**: https://deploymentanddevopsessentials-joszi6a0s-ezra254s-projects.vercel.app
+- [x] **Backend deployed to Render**: https://deployment-and-devops-essentials-ezra254.onrender.com
+- [x] **MongoDB Atlas connected and working**
+- [x] **CORS configured and working**
+- [x] **Application fully functional**
 
 ## 📄 License
 
