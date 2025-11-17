@@ -45,6 +45,14 @@ app.get('/api/health', (req, res) => {
 // API routes
 app.use('/api/tasks', taskRoutes);
 
+// Log all API requests in development
+if (process.env.NODE_ENV !== 'production') {
+  app.use('/api', (req, res, next) => {
+    console.log(`${req.method} ${req.path}`, req.body);
+    next();
+  });
+}
+
 // Root endpoint
 app.get('/', (req, res) => {
   res.json({
